@@ -5,21 +5,30 @@
         <div class="col-lg-4 mx-auto">
           <div class="auth-form-light text-left p-5">
             <div class="brand-logo">
-              <img src="../../assets/images/logo.svg">
+              <img src="https://1000logos.net/wp-content/uploads/2017/06/Spiderman-Logo.png">
             </div>
             <h4>Hello! let's get started</h4>
             <h6 class="font-weight-light">Sign in to continue.</h6>
-            <form class="pt-3">
+            <form class="pt-3" #loginForm="ngForm">
               <div class="form-group">
-                <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                <input required type="text" name="userName" [(ngModel)]="loginObj.userName" 
+                       class="form-control form-control-lg" #userName="ngModel"
+                       id="exampleInputEmail1" placeholder="Username">
+                <div *ngIf="userName.invalid && userName.touched" class="text-danger mt-1">
+                  Username is required
+                </div>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                  placeholder="Password">
+                <input required type="password" name="password" [(ngModel)]="loginObj.password" 
+                       class="form-control form-control-lg" #password="ngModel"
+                       id="exampleInputPassword1" placeholder="Password">
+                <div *ngIf="password.invalid && password.touched" class="text-danger mt-1">
+                  Password is required
+                </div>
               </div>
               <div class="mt-3 d-grid gap-2">
                 <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn"
-                  (click)="onLogin()" type="button">SIGN IN</button>
+                  (click)="onLogin()" type="button" [disabled]="loginForm.invalid">SIGN IN</button>
               </div>
               <div class="my-2 d-flex justify-content-between align-items-center">
                 <div class="form-check">
@@ -40,7 +49,5 @@
         </div>
       </div>
     </div>
-    <!-- content-wrapper ends -->
   </div>
-  <!-- page-body-wrapper ends -->
 </div>
